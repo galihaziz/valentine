@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine Gita ❤️</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+.font-romantic { font-family: 'Great Vibes', cursive; }
+
+.love {
+    position: fixed;
+    top: -20px;
+    animation: fall linear forwards;
+}
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body class="bg-gradient-to-br from-pink-200 via-rose-100 to-pink-300 min-h-screen flex items-center justify-center px-4 overflow-hidden">
+
+<div class="bg-white/80 backdrop-blur-lg shadow-2xl rounded-3xl p-6 sm:p-10 w-full max-w-md text-center relative z-10">
+
+    <h1 class="font-romantic text-4xl sm:text-5xl text-rose-500 mb-4">
+        Happy Valentine, Gita ❤️
+    </h1>
+
+    <p id="typing" class="text-gray-600 text-sm sm:text-base min-h-[60px]"></p>
+
+    <div class="flex flex-col sm:flex-row gap-3 mt-6 justify-center">
+        <button onclick="openLetter()"
+            class="bg-rose-500 hover:bg-rose-600 text-white px-5 py-2 rounded-full transition duration-300 hover:scale-110">
+            Buka Surat 💌
+        </button>
+
+        <button onclick="toggleMusic()"
+            class="bg-pink-400 hover:bg-pink-500 text-white px-5 py-2 rounded-full transition duration-300 hover:scale-110">
+            Play Musik 🎵
+        </button>
+    </div>
+</div>
+
+<!-- Popup -->
+<div id="popup"
+    class="fixed inset-0 bg-black/50 hidden items-center justify-center px-4 z-20">
+
+    <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center animate-[zoomIn_0.4s_ease]">
+        <h2 class="font-romantic text-3xl text-rose-500 mb-3">Untuk Gita 💖</h2>
+        <p class="text-gray-600 text-sm sm:text-base">
+            Kamu adalah alasan senyumku setiap hari.  
+            Semoga cinta kita selalu tumbuh dan tak pernah pudar ❤️
+        </p>
+
+        <button onclick="closeLetter()"
+            class="mt-5 bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full transition">
+            Tutup
+        </button>
+    </div>
+</div>
+
+<audio id="music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+<script>
+// Typing Effect
+const text = "Untuk Gita yang selalu membuat hariku lebih indah 🌸💖";
+let i = 0;
+function typing() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 40);
+    }
+}
+typing();
+
+// Popup
+function openLetter() {
+    document.getElementById("popup").classList.remove("hidden");
+    document.getElementById("popup").classList.add("flex");
+    confetti();
+}
+function closeLetter() {
+    document.getElementById("popup").classList.add("hidden");
+}
+
+// Music
+function toggleMusic() {
+    const music = document.getElementById("music");
+    if (music.paused) {
+        music.play();
+    } else {
+        music.pause();
+    }
+}
+
+// Love Rain
+function createLove() {
+    const love = document.createElement("div");
+    love.innerHTML = "❤️";
+    love.classList.add("love");
+    love.style.left = Math.random() * 100 + "vw";
+    love.style.fontSize = Math.random() * 20 + 15 + "px";
+    love.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(love);
+
+    setTimeout(() => love.remove(), 5000);
+}
+setInterval(createLove, 400);
+
+// Confetti
+function confetti() {
+    for (let i = 0; i < 80; i++) {
+        const conf = document.createElement("div");
+        conf.innerHTML = "💖";
+        conf.classList.add("love");
+        conf.style.left = Math.random() * 100 + "vw";
+        conf.style.fontSize = "20px";
+        conf.style.animationDuration = "3s";
+        document.body.appendChild(conf);
+
+        setTimeout(() => conf.remove(), 3000);
+    }
+}
+</script>
+
+</body>
+</html>
